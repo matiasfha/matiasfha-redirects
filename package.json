@@ -8,6 +8,7 @@
   "scripts": {
     "shorten": "netlify-shortener"
   },
+  "bin": {"shorten": "cli.js"},
   "keywords": [],
   "author": "Matias Hernandez <matiasfh@gmail.com> (https://matiashernandez.dev/)",
   "license": "ISC",
