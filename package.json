@@ -1,0 +1,17 @@
+{
+  "baseUrl":"https://matiasfha.dev",
+  "private":true,
+  "name": "matiasfha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "shorten": "netlify-shortener"
+  },
+  "keywords": [],
+  "author": "Matias Hernandez <matiasfh@gmail.com> (https://matiashernandez.dev/)",
+  "license": "ISC",
+  "devDependencies": {
+    "netlify-shortener": "2.4.0"
+  }
+}
