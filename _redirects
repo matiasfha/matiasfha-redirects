@@ -1,3 +1,4 @@
+/tl                       https://tl.matiashernandez.dev
 /naturalezas-del-estado   https://github.com/matiasfha/nerdearla-las-naturalezas-del-estado
 /consulting               https://www.buymeacoffee.com/matiasfha/e/37359
 /support                  https://buymeacoffee.com/matiasfha
@@ -22,6 +23,7 @@
 /fcces                    https://www.freecodecamp.org/espanol/news/author/matias-hernandez/
 /egghead                  https://egghead.io/q/resources-by-matias-hernandez?af=4cexzz
 /podcast                  https://www.cafecon.tech
+/podcast/*                https://www.cafecon.tech/1081172/:splat
 /blog                     https://matiashernandez.dev/blog
 /site                     https://matiashernandez.dev
 /*                        https://matiashernandez.dev
