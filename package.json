@@ -15,7 +15,8 @@
   "author": "Matias Hernandez <matiasfh@gmail.com> (https://matiashernandez.dev/)",
   "license": "ISC",
   "devDependencies": {
-    "netlify-shortener": "2.4.0"
+    "netlify-shortener": "2.4.0",
+    "oniguruma": "7.2.3"
   },
   "dependencies": {
     "@netlify/functions": "0.7.2",
