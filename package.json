@@ -8,6 +8,7 @@
   "scripts": {
     "shorten": "netlify-shortener"
   },
+  "type":"module",
   "bin": {
     "shorten": "cli.js"
   },
