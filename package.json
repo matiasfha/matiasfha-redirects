@@ -1,6 +1,6 @@
 {
-  "baseUrl":"https://matiasfha.dev",
-  "private":true,
+  "baseUrl": "https://matiasfha.dev",
+  "private": true,
   "name": "matiasfha",
   "version": "1.0.0",
   "description": "",
@@ -8,11 +8,26 @@
   "scripts": {
     "shorten": "netlify-shortener"
   },
-  "bin": {"shorten": "cli.js"},
+  "bin": {
+    "shorten": "cli.js"
+  },
   "keywords": [],
   "author": "Matias Hernandez <matiasfh@gmail.com> (https://matiashernandez.dev/)",
   "license": "ISC",
   "devDependencies": {
     "netlify-shortener": "2.4.0"
+  },
+  "dependencies": {
+    "@netlify/functions": "0.7.2",
+    "posthtml": "0.16.5",
+    "posthtml-inline-css": "1.2.3",
+    "posthtml-noopener": "1.0.5",
+    "posthtml-tidy": "0.8.0",
+    "rehype-format": "4.0.0",
+    "rehype-shiki": "0.0.9",
+    "rehype-stringify": "9.0.2",
+    "remark-parse": "10.0.0",
+    "remark-rehype": "9.0.0",
+    "unified": "10.1.0"
   }
 }
