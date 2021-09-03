@@ -54,19 +54,29 @@ async function transform(markdown) {
 }
 
 export async function handler(event, context) {
-	
-	const { body } = event
-	const result = await transform(body);
-
 	const headers = {
 		"Access-Control-Allow-Origin": "*",
 		"Access-Control-Allow-Headers": "Content-Type",
 		"Access-Control-Allow-Methods": "POST",
 	};
-	return {
-		statusCode: 200,
-		body: String(result),
-		headers
-	};	
+	if(event.httpMethod  ===  'OPTIONS') {
+		console.log('Pre-flight')
+		return  {
+			statusCode: 204,
+			headers,
+			body: {}
+		}
+	}	
+	if(event.httpMethod === 'POST') {
+		const { body } = event
+		const result = await transform(body);
+		console.log('POST request')
+		return {
+			statusCode: 200,
+			body: String(result),
+			headers
+		};	
+	}
+	
 	
 }
