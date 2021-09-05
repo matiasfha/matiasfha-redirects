@@ -1,44 +1,41 @@
 import  posthtml from 'posthtml';
 import  inlineHtml from 'posthtml-inline-css';
+import inlineAssets from 'posthtml-inline-assets';
 import  { unified } from 'unified';
 import  remarkParse from 'remark-parse';
 import  remarkRehype from 'remark-rehype';
 import  rehypeFormat from 'rehype-format';
 import  rehypeStringify from 'rehype-stringify';
-import  shiki from 'rehype-shiki';
 import  { noopener } from 'posthtml-noopener';
-import  tidy from 'posthtml-tidy';
+import rehypeShiki from 'rehype-shiki'
+import tidy from 'posthtml-tidy'
+import removeTags from 'posthtml-remove-tags';
 
-async function transform(markdown) {
+
+async function transform({markdown, customCss }: { markdown:string, customCss: string }) {
 	const output = await unified()
 		.use(remarkParse)
 		.use(remarkRehype)
 		.data('settings', { fragment: true })
-		.use(shiki)
-		//.use(rehypeSanitize, defaultSchema)
-		//.use(rehypeDocument)
+		
+		.use(rehypeShiki)
 		.use(rehypeFormat)
 		.use(rehypeStringify)
 		.process(markdown);
-
+	
 	const html = `
-        <html>
-        <head>
         <style>
         
-        blockquote {
-            border-left: 3px #999 solid;
-            padding: 0.5rem
-        }
-        </style>
-        </head>
-        <body>
-            ${output}
-        </body>
-        </html>
+        ${customCss}
+		</style>
+        ${output}
+        
     `;
+	
 	const result = await posthtml([
 		inlineHtml(),
+		inlineAssets(),
+		removeTags({tags: ['style', 'script']}),
 		tidy({
 			log: false,
 			rules: {
@@ -50,32 +47,38 @@ async function transform(markdown) {
 		}),
 		noopener()
 	]).process(html);
-	return result;
+	return result.html;
 }
 
-export async function handler(event, context) {
+import { Handler  } from '@netlify/functions';
+export const handler: Handler = async(event) => {
 	const headers = {
 		"Access-Control-Allow-Origin": "*",
 		"Access-Control-Allow-Headers": "Content-Type",
 		"Access-Control-Allow-Methods": "POST",
 	};
 	if(event.httpMethod  ===  'OPTIONS') {
-		console.log('Pre-flight')
 		return  {
 			statusCode: 204,
 			headers,
-			body: {}
+			body: ''
 		}
 	}	
 	if(event.httpMethod === 'POST') {
 		const { body } = event
-		const result = await transform(body);
-		console.log('POST request')
+		const { markdown, css } = JSON.parse(body ?? '')
+		
+		const result = await transform({ markdown: markdown ?? '', customCss: css ?? ''});
+		
 		return {
 			statusCode: 200,
-			body: String(result),
+			body: result,
 			headers
 		};	
+	}
+	return {
+		statusCode: 500,
+		body:''
 	}
 	
 	
