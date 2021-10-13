@@ -59,7 +59,7 @@ export const handler: Handler = async(event) => {
 	};
 	if(event.httpMethod  ===  'OPTIONS') {
 		return  {
-			statusCode: 204,
+			statusCode: 200,
 			headers,
 			body: ''
 		}
